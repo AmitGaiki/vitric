@@ -86,6 +86,7 @@
 				</section>
 
 				<div class="container">
+					
 					<div class="row">
 						<div class="col-md-8 col-sm-6 col-xs-12">
 							<form>
@@ -94,9 +95,9 @@
 									<input cols="70" type="text" name="name" placeholder="Name" />
 									<br><br>
 									<input cols="70" type="email" name="email" placeholder="Email" />
-									<br><br>
-									<textarea class="input-xxlarge" cols="70" rows="10" placeholder="Your Message"></textarea>
-									<br><br>
+									<br><br><br>
+									<textarea class="input-xxlarge" cols="70" rows="12" placeholder="Your Message"></textarea>
+									<br><br><br>
 									<button class="btn btn-success" type="submit">Submit</button><br>
 								</fieldset>
 							</form>
@@ -109,6 +110,8 @@
 							Nerul, Navi Mumbai - 400706<br>
 							Call: +91-8496003316<br>
 							Email: info@vitric.in<br>
+							<br>
+							<div id="googlemaps" class="google-map"></div>
 						</div>
 					</div>
 					<hr class="strong">
@@ -173,6 +176,62 @@
 		
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
+
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script>
+
+			/*
+			Map Settings
+
+				Find the Latitude and Longitude of your address:
+					- http://universimmedia.pagesperso-orange.fr/geo/loc.htm
+					- http://www.findlatitudeandlongitude.com/find-address-from-latitude-and-longitude/
+
+			*/
+
+			// Map Markers
+			var mapMarkers = [{
+				address: "Twin City, Plot 4-B, Sector 11, Nerul, Navi Mumbai",
+				html: "<strong>Vitric Business Solutions</strong><br>Nerul, Navi Mumbai",
+				icon: {
+					image: "img/pin.png",
+					iconsize: [26, 46],
+					iconanchor: [12, 46]
+				},
+				popup: true
+			}];
+
+			// Map Initial Location
+			var initLatitude = 19.0372616;
+			var initLongitude = 73.01926732;
+
+			// Map Extended Settings
+			var mapSettings = {
+				controls: {
+					draggable: (($.browser.mobile) ? false : true),
+					panControl: true,
+					zoomControl: true,
+					mapTypeControl: true,
+					scaleControl: true,
+					streetViewControl: true,
+					overviewMapControl: true
+				},
+				scrollwheel: false,
+				markers: mapMarkers,
+				latitude: initLatitude,
+				longitude: initLongitude,
+				zoom: 16
+			};
+
+			var map = $("#googlemaps").gMap(mapSettings);
+
+			// Map Center At
+			var mapCenterAt = function(options, e) {
+				e.preventDefault();
+				$("#googlemaps").gMap("centerAt", options);
+			}
+
+		</script>
 
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
